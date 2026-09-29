@@ -1,17 +1,18 @@
 <template>
-  <section class="section skills-section" id="skills">
+  <section class="section" id="skills">
     <div class="container">
-      <p class="section-label">What I work with</p>
-      <h2 class="section-title">Skills &amp; tech stack</h2>
+      <div class="section-head">
+        <h2 class="section-title">
+          The stack
+        </h2>
+      </div>
 
-      <div class="skills-grid">
-        <div v-for="group in skillGroups" :key="group.category" class="skill-group card">
-          <h3 class="group-title">{{ group.category }}</h3>
-          <div class="tags-wrap">
-            <span v-for="skill in group.skills" :key="skill" class="tag skill-tag">
-              {{ skill }}
-            </span>
-          </div>
+      <div class="stack">
+        <div v-for="group in skillGroups" :key="group.category" class="stack-row">
+          <h3 class="stack-label">{{ group.category }}</h3>
+          <ul class="stack-items">
+            <li v-for="skill in group.skills" :key="skill" class="chip">{{ skill }}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -19,65 +20,42 @@
 </template>
 
 <script setup lang="ts">
-const skillGroups = [
-  {
-    category: 'Languages & frameworks',
-    skills: ['C#', '.NET Core', 'TypeScript', 'JavaScript', 'Python', 'ASP.NET', 'React', 'Vue.js'],
-  },
-  {
-    category: 'Tools & platforms',
-    skills: ['Azure', 'Supabase', 'Docker', 'Git', 'GitLab', 'CI/CD', 'Azure DevOps', 'TeamCity'],
-  },
-  {
-    category: 'Testing',
-    skills: ['Unit Testing', 'Integration Testing', 'E2E (Cypress)', 'NUnit', 'xUnit'],
-  },
-  {
-    category: 'Other',
-    skills: ['SOLID principles', 'Clean Architecture', 'Agile/Scrum', 'REST APIs', 'SQL', 'PostgreSQL'],
-  },
-]
+import { skillGroups } from '../data/profile'
 </script>
 
 <style scoped>
-.skills-section {
-  background-color: var(--color-surface);
-  transition: background-color var(--transition);
+.stack {
+  border-top: 1px solid var(--line);
 }
 
-.skills-grid {
+.stack-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 48px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px 24px;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
 }
 
-.skill-group {
-  background-color: var(--color-bg);
+.stack-label {
+  grid-column: 1 / span 3;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text);
 }
 
-.group-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 16px;
-}
-
-.tags-wrap {
+.stack-items {
+  grid-column: 4 / -1;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.skill-tag {
-  font-size: 0.875rem;
-}
-
-@media (max-width: 640px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 760px) {
+  .stack-label,
+  .stack-items {
+    grid-column: 1 / -1;
   }
 }
 </style>

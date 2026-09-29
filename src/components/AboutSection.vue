@@ -1,101 +1,109 @@
 <template>
   <section class="section" id="about">
-    <div class="container about-inner">
-      <div class="about-text">
-        <p class="section-label">Who I am</p>
-        <h2 class="section-title">About me</h2>
-        <p class="section-body">
-          Analyst Developer with a strong technical background and a focus on delivering scalable,
-          efficient software solutions. With a Master's degree in Applied Computer Science and
-          Control from Brno University of Technology (graduated with Red Diploma), I specialise in
-          C# and .NET development.
+    <div class="container about">
+      <h2 class="section-title title">
+        Engineer by training, developer by trade.
+      </h2>
+
+      <div class="prose">
+        <p>
+          I'm a .NET developer with a Master's in Applied Computer Science and Control from Brno
+          University of Technology, where I graduated with a Red Diploma. I specialise in C# and
+          .NET, with a focus on delivering scalable, efficient software.
         </p>
-        <p class="section-body" style="margin-top: 16px;">
-          My experience spans both technical and business operations — from software development and
-          quality assurance to production support and release management at a global fintech
-          platform. I'm passionate about continuous improvement and building tools that actually
-          solve real problems.
+        <p>
+          At FNZ I worked across the full life of a release: software development, quality
+          assurance, production support, and release management for major global financial
+          clients. I also interviewed candidates and mentored new joiners.
         </p>
-        <p class="section-body" style="margin-top: 16px;">
-          Outside of work I build personal projects, including AWY — a full personal workspace app
-          I designed and built from scratch.
+        <p>
+          Today at Kentico I develop and maintain the company's enterprise CRM platform, built on
+          Microsoft Dynamics&nbsp;365 and tailored to the business through custom development and a wide
+          range of third-party integrations.
+        </p>
+        <p>
+          Outside of work I build my own products end to end. The biggest is
+          <RouterLink to="/projects/awy" class="text-link">AWY</RouterLink>, a personal workspace app I
+          designed and built from scratch.
         </p>
       </div>
 
-      <div class="about-cards">
-        <div class="about-stat card">
-          <span class="stat-number">3+</span>
-          <span class="stat-label">Years experience</span>
+      <dl class="facts">
+        <div v-for="f in facts" :key="f.term" class="fact">
+          <dt>{{ f.term }}</dt>
+          <dd>{{ f.value }}</dd>
         </div>
-        <div class="about-stat card">
-          <span class="stat-number">M.Sc.</span>
-          <span class="stat-label">Applied CS & Control</span>
-        </div>
-        <div class="about-stat card">
-          <span class="stat-number">Fintech</span>
-          <span class="stat-label">Domain expertise</span>
-        </div>
-        <div class="about-stat card">
-          <span class="stat-number">.NET</span>
-          <span class="stat-label">Core specialisation</span>
-        </div>
-      </div>
+      </dl>
     </div>
   </section>
 </template>
 
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+
+const facts = [
+  { term: 'Currently', value: 'Internal Services Developer, Kentico' },
+  { term: 'Focus', value: 'C#, .NET, Dynamics\u00a0365, TypeScript' },
+  { term: 'Domain', value: 'CRM, fintech, ERP' },
+  { term: 'Education', value: 'M.Sc., Brno University of Technology' },
+  { term: 'Location', value: 'Brno, Czech Republic' },
+]
+</script>
+
 <style scoped>
-.about-inner {
+.about {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 64px;
-  align-items: start;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0 24px;
 }
 
-.about-text {
-  max-width: 640px;
+.title {
+  grid-column: 1 / span 8;
+  margin-bottom: 48px;
 }
 
-.about-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  flex-shrink: 0;
-}
-
-.about-stat {
+.prose {
+  grid-column: 1 / span 7;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  min-width: 130px;
+  gap: 20px;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 62ch;
 }
 
-.stat-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  line-height: 1;
+.facts {
+  grid-column: 9 / span 4;
+  align-self: start;
+  border-top: 1px solid var(--line);
 }
 
-.stat-label {
-  font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+.fact {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.875rem;
 }
 
-@media (max-width: 900px) {
-  .about-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
+.fact dt {
+  color: var(--text-3);
+}
+
+.fact dd {
+  color: var(--text);
+}
+
+@media (max-width: 960px) {
+  .title,
+  .prose,
+  .facts {
+    grid-column: 1 / -1;
   }
-
-  .about-cards {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .about-cards {
-    grid-template-columns: 1fr 1fr;
+  .facts {
+    margin-top: 48px;
   }
 }
 </style>

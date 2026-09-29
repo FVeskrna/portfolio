@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#2563EB"/>
-  <text x="16" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="16" fill="white">FV</text>
+  <rect width="32" height="32" rx="8" fill="#08090A"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <text x="16" y="21" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="13" letter-spacing="-0.5" fill="#F4F5F6">FV</text>
 </svg>

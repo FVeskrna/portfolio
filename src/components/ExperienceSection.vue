@@ -1,241 +1,191 @@
 <template>
   <section class="section" id="experience">
     <div class="container">
-      <p class="section-label">Career</p>
-      <h2 class="section-title">Work experience</h2>
-
-      <div class="timeline">
-        <div
-          v-for="(item, index) in experience"
-          :key="index"
-          class="timeline-item"
-        >
-          <div class="timeline-dot" />
-          <div class="timeline-content card">
-            <div class="timeline-header">
-              <div>
-                <h3 class="timeline-role">{{ item.role }}</h3>
-                <p class="timeline-company">{{ item.company }}</p>
-              </div>
-              <span class="timeline-period">{{ item.period }}</span>
-            </div>
-            <p class="timeline-desc">{{ item.description }}</p>
-          </div>
-        </div>
+      <div class="section-head">
+        <h2 class="section-title">
+          Experience
+        </h2>
       </div>
 
-      <!-- Education -->
-      <div class="education-block">
-        <h3 class="edu-heading">Education</h3>
-        <div class="edu-list">
-          <div v-for="(edu, index) in education" :key="index" class="edu-item card">
-            <div class="edu-header">
-              <div>
-                <p class="edu-degree">{{ edu.degree }}</p>
-                <p class="edu-school">{{ edu.school }}</p>
-              </div>
-              <span class="edu-period">{{ edu.period }}</span>
-            </div>
-            <p v-if="edu.note" class="edu-note">{{ edu.note }}</p>
+      <ol class="log">
+        <li v-for="item in experience" :key="item.role" class="entry">
+          <p class="when mono">
+            <span>{{ item.start }}</span>
+            <span class="when-sep">–</span>
+            <span :class="{ present: item.current }">{{ item.end }}</span>
+          </p>
+          <div class="rail" aria-hidden="true">
+            <span v-if="item.current" class="live-dot" />
+            <span v-else class="node" />
           </div>
-        </div>
-      </div>
+          <div class="what">
+            <h3 class="role">
+              {{ item.role }} <span class="at">at</span>{{ ' ' }}<span class="org">{{ item.company }}</span>
+            </h3>
+            <p class="desc">{{ item.description }}</p>
+          </div>
+        </li>
+      </ol>
+
+      <h3 id="education" class="sub-title">Education</h3>
+      <ol class="log">
+        <li v-for="edu in education" :key="edu.degree" class="entry">
+          <p class="when mono">
+            <span>{{ edu.start }}</span>
+            <span class="when-sep">–</span>
+            <span>{{ edu.end }}</span>
+          </p>
+          <div class="rail" aria-hidden="true"><span class="node" /></div>
+          <div class="what">
+            <h3 class="role">
+              {{ edu.degree }} <span class="at">at</span>{{ ' ' }}<span class="org">{{ edu.school }}</span>
+            </h3>
+            <p class="desc">
+              {{ edu.field }}<template v-if="edu.note">. <span class="note">{{ edu.note }}</span></template>
+            </p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-const experience = [
-  {
-    company: 'Techfides',
-    role: 'Full-Stack Developer',
-    period: 'January 2026 – Present',
-    description:
-      'ERP development using TypeScript and Vue.js. E2E testing with Cypress. GitLab CI/CD pipelines.',
-  },
-  {
-    company: 'FNZ',
-    role: 'Analyst Developer',
-    period: 'January 2025 – December 2025',
-    description:
-      '.NET REST API development and maintenance. Code reviews. Release management for major global financial clients. Participation in hiring as primary interviewer. Mentoring via Buddy Program.',
-  },
-  {
-    company: 'FNZ',
-    role: 'Associate Analyst Developer',
-    period: 'July 2024 – December 2024',
-    description:
-      'Feature development and maintenance on .NET platform. Production incident resolution. Collaboration with analysts on requirements.',
-  },
-  {
-    company: 'FNZ',
-    role: 'Technology Solutions Graduate',
-    period: 'August 2023 – July 2024',
-    description:
-      'Rotational graduate program: Analysis & Test, Development, Production Support.',
-  },
-]
-
-const education = [
-  {
-    school: 'Brno University of Technology',
-    degree: "Master's Degree — Mechanical Engineering, Applied Computer Science and Control",
-    period: '2021 – 2023',
-    note: 'Graduated with Red Diploma',
-  },
-  {
-    school: 'Brno University of Technology',
-    degree: "Bachelor's Degree — Mechanical Engineering, Applied Computer Science and Control",
-    period: '2018 – 2021',
-    note: '',
-  },
-]
+import { experience, education } from '../data/profile'
 </script>
 
 <style scoped>
-/* Timeline */
-.timeline {
-  position: relative;
-  margin-top: 48px;
-  padding-left: 28px;
+.log {
+  border-top: 1px solid var(--line);
 }
 
-.timeline::before {
+.entry {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0 24px;
+  position: relative;
+}
+
+.when {
+  grid-column: 1 / span 2;
+  padding: 28px 0;
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  display: flex;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.when-sep {
+  color: var(--text-3);
+}
+
+.present {
+  color: var(--signal);
+}
+
+.rail {
+  grid-column: 3 / span 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 34px;
+}
+
+.rail::before {
   content: '';
   position: absolute;
-  left: 7px;
-  top: 8px;
-  bottom: 8px;
-  width: 2px;
-  background-color: var(--color-border);
-  transition: background-color var(--transition);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--line);
 }
 
-.timeline-item {
+.entry:first-child .rail::before {
+  top: 34px;
+}
+
+.entry:last-child .rail::before {
+  bottom: auto;
+  height: 38px;
+}
+
+.node,
+.rail .live-dot {
   position: relative;
-  margin-bottom: 24px;
+  z-index: 1;
 }
 
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -28px;
-  top: 24px;
-  width: 14px;
-  height: 14px;
+.node {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background-color: var(--color-accent);
-  border: 2px solid var(--color-bg);
-  box-shadow: 0 0 0 2px var(--color-accent);
-  transition: background-color var(--transition), border-color var(--transition);
+  background: var(--bg);
+  box-shadow: 0 0 0 1.5px var(--text-3) inset;
 }
 
-.timeline-content {
-  /* inherits .card */
+.what {
+  grid-column: 4 / -1;
+  padding: 24px 0 28px;
+  border-bottom: 1px solid var(--line);
 }
 
-.timeline-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+.entry:last-child .what {
+  border-bottom: none;
 }
 
-.timeline-role {
-  font-size: 1.0625rem;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin-bottom: 2px;
-}
-
-.timeline-company {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-accent);
-}
-
-.timeline-period {
-  font-size: 0.8125rem;
-  color: var(--color-text-secondary);
-  white-space: nowrap;
-  padding-top: 2px;
-}
-
-.timeline-desc {
-  font-size: 0.9375rem;
-  color: var(--color-text-secondary);
-  line-height: 1.65;
-}
-
-/* Education */
-.education-block {
-  margin-top: 56px;
-}
-
-.edu-heading {
+.role {
   font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin-bottom: 20px;
-}
-
-.edu-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.edu-item {
-  /* inherits .card */
-}
-
-.edu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.edu-degree {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: 2px;
-}
-
-.edu-school {
-  font-size: 0.875rem;
-  color: var(--color-accent);
   font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin-bottom: 8px;
 }
 
-.edu-period {
-  font-size: 0.8125rem;
-  color: var(--color-text-secondary);
-  white-space: nowrap;
-  padding-top: 2px;
+.at {
+  margin: 0 0.1em;
+  color: var(--text-3);
+  font-weight: 400;
 }
 
-.edu-note {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  margin-top: 8px;
-  font-style: italic;
+.desc {
+  max-width: 68ch;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--text-2);
 }
 
-@media (max-width: 640px) {
-  .timeline-header {
-    flex-direction: column;
+.note {
+  color: var(--text);
+}
+
+.sub-title {
+  margin: 72px 0 20px;
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+}
+
+.log:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 760px) {
+  .entry {
+    grid-template-columns: 20px 1fr;
+    gap: 0 16px;
   }
-
-  .edu-header {
-    flex-direction: column;
+  .rail {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  .when {
+    grid-column: 2;
+    padding: 24px 0 4px;
+  }
+  .what {
+    grid-column: 2;
+    padding-top: 0;
   }
 }
 </style>

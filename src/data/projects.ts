@@ -74,7 +74,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: 'awy',
-    title: 'AWY — Always With You',
+    title: 'AWY: Always With You',
     tagline: 'A personal command centre that lives in your browser',
     tags: ['React', 'TypeScript', 'Supabase', 'Vite'],
     liveUrl: 'https://fveskrna.github.io/Awy/',
@@ -83,19 +83,19 @@ export const projects: Project[] = [
     screenshots: [
       {
         filename: 'awy-dashboard.png',
-        caption: 'Command Center — customisable widget dashboard',
+        caption: 'Command Center: customisable widget dashboard',
       },
       {
         filename: 'awy-toolbox.png',
-        caption: 'Toolbox — JWT Debugger and 18 other developer utilities',
+        caption: 'Toolbox: JWT Debugger and 18 other developer utilities',
       },
       {
         filename: 'awy-applibrary.png',
-        caption: 'App Library — browse and pin modules to your dock',
+        caption: 'App Library: browse and pin modules to your dock',
       },
       {
         filename: 'awy-commandpalette.png',
-        caption: '⌘K command palette — navigate anywhere instantly',
+        caption: '⌘K command palette: navigate anywhere instantly',
       },
     ],
 
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     ],
 
     problem:
-      "Constant tab switching. As a developer you end up with a task manager in one tab, notes somewhere else, a JSON formatter bookmarked somewhere, a timer in another window. The cognitive cost of switching context between tools adds up. AWY was built to eliminate that — one tab for everything a developer and a normal person needs day to day.",
+      "Constant tab switching. As a developer you end up with a task manager in one tab, notes somewhere else, a JSON formatter bookmarked somewhere, a timer in another window. The cognitive cost of switching context between tools adds up. AWY was built to eliminate that, one tab for everything a developer and a normal person needs day to day.",
 
     solution:
       'A modular dashboard where you choose which tools are visible. Each module is self-contained and the dashboard is a fully customisable grid of widgets showing live summaries. Everything writes to localStorage instantly for offline capability, then syncs to Supabase in the background. The app is deployed as a static site on GitHub Pages with no server required.',
@@ -132,22 +132,22 @@ export const projects: Project[] = [
       {
         title: '⌘K command palette',
         description:
-          'A keyboard-driven command palette accessible from anywhere in the app via ⌘K (or Ctrl+K on Windows). Commands are categorised — Navigation, Focus, Utility — each with keyboard shortcut hints displayed inline. Built entirely in-house without a library, it supports search across all modules and tools. The fastest way to navigate a 12-module app without touching the mouse.',
+          'A keyboard-driven command palette accessible from anywhere in the app via ⌘K (or Ctrl+K on Windows). Commands are categorised (Navigation, Focus, Utility), each with keyboard shortcut hints displayed inline. Built entirely in-house without a library, it supports search across all modules and tools. The fastest way to navigate a 12-module app without touching the mouse.',
       },
       {
         title: 'Smart Asset module with OCR',
         description:
-          'The Smart Asset module lets users upload receipts and warranty documents. It uses Tesseract.js to run OCR directly in the browser — no server, no API call, no cost. The extracted text pre-fills the form fields automatically.',
+          'The Smart Asset module lets users upload receipts and warranty documents. It uses Tesseract.js to run OCR directly in the browser, no server, no API call, no cost. The extracted text pre-fills the form fields automatically.',
       },
       {
         title: 'Technology choices',
         description:
-          'Built on React 19 with TypeScript for type safety across all 12 modules and 19 tools. Vite as the build tool for fast development and optimised production builds. Supabase handles both authentication and cloud sync, chosen for its generous free tier and real-time capabilities. Deployed as a static site on GitHub Pages — no server, no hosting cost, no infrastructure to maintain.',
+          'Built on React 19 with TypeScript for type safety across all 12 modules and 19 tools. Vite as the build tool for fast development and optimised production builds. Supabase handles both authentication and cloud sync, chosen for its generous free tier and real-time capabilities. Deployed as a static site on GitHub Pages, no server, no hosting cost, no infrastructure to maintain.',
       },
       {
         title: 'Module system',
         description:
-          "Each module is a ModuleManifest object with an ID, name, icon, app component, widget component, and optional quick action. Code splitting via React.lazy() ensures only the active module's code loads. Adding a new module means adding one manifest object — nothing else.",
+          "Each module is a ModuleManifest object with an ID, name, icon, app component, widget component, and optional quick action. Code splitting via React.lazy() ensures only the active module's code loads. Adding a new module means adding one manifest object, nothing else.",
       },
       {
         title: 'Custom session security',
@@ -173,7 +173,7 @@ export const projects: Project[] = [
     thesisUrl: 'https://www.vut.cz/en/students/final-thesis/detail/132854',
 
     context:
-      'This project was developed as my Bachelor\'s thesis at Brno University of Technology, submitted in 2021. It represents around four months of solo development in Unity — my first large-scale software project — and earned a Red Diploma grade. The goal was to design and build a fully interactive VR workshop environment that could serve as a foundation for training simulations, assembly visualisation, or engineering education.',
+      'This project was developed as my Bachelor\'s thesis at Brno University of Technology, submitted in 2021. It represents around four months of solo development in Unity, my first large-scale software project, and earned a Red Diploma grade. The goal was to design and build a fully interactive VR workshop environment that could serve as a foundation for training simulations, assembly visualisation, or engineering education.',
 
     overview:
       'The VR Workshop is an immersive virtual reality application built in Unity for the Oculus Rift S. Users can move freely through a realistically modelled workshop using 6 degrees of freedom, pick up and interact with tools, cut materials with a table saw, assemble components using nails and screws, and complete guided construction tasks through a blueprint system. The application was designed to be modular and extensible, with every interactive system built from scratch in C#.',
@@ -226,7 +226,7 @@ export const projects: Project[] = [
       {
         title: 'Custom Offset Grab system',
         description:
-          "The XR Interaction Toolkit's default grab snaps objects to the controller origin. A custom OffsetGrab script extending XRGrabInteractable captures the controller's exact position and rotation at the moment of grabbing and sets that as the attach transform — so objects are held exactly where you pick them up, not teleported to your hand.",
+          "The XR Interaction Toolkit's default grab snaps objects to the controller origin. A custom OffsetGrab script extending XRGrabInteractable captures the controller's exact position and rotation at the moment of grabbing and sets that as the attach transform, so objects are held exactly where you pick them up, not teleported to your hand.",
       },
       {
         title: 'Dynamic assembly via parenting',
@@ -246,12 +246,12 @@ export const projects: Project[] = [
       {
         title: 'XR Base Interactor spawner',
         description:
-          "Instead of placing finite copies of materials around the scene, a custom class extending XRBaseInteractable overrides OnSelectEntered(). When the user attempts to grab a spawner object, it instantiates a fresh copy of the target prefab and immediately calls ForceSelect() — so the user seamlessly picks up a new object rather than the spawner itself.",
+          "Instead of placing finite copies of materials around the scene, a custom class extending XRBaseInteractable overrides OnSelectEntered(). When the user attempts to grab a spawner object, it instantiates a fresh copy of the target prefab and immediately calls ForceSelect(), so the user seamlessly picks up a new object rather than the spawner itself.",
       },
       {
-        title: 'Academic context — built from scratch',
+        title: 'Academic context: built from scratch',
         description:
-          "Every system in this application was written from scratch rather than using paid Asset Store solutions. This was a deliberate choice to build deep understanding of Unity's XR architecture and C# scripting patterns. The result was significantly more development time, but complete control over every system — and a thorough understanding of how each component works internally.",
+          "Every system in this application was written from scratch rather than using paid Asset Store solutions. This was a deliberate choice to build deep understanding of Unity's XR architecture and C# scripting patterns. The result was significantly more development time, but complete control over every system, and a thorough understanding of how each component works internally.",
       },
     ],
 
@@ -292,10 +292,10 @@ export const projects: Project[] = [
     thesisUrl: 'https://www.vut.cz/studenti/zav-prace/detail/149729',
 
     context:
-      "This project was developed as my Master's thesis at Brno University of Technology, submitted in 2023. Building on my earlier Bachelor's thesis (the VR Workshop), this project explored how virtual reality can serve the needs of Industry 4.0 — specifically enabling multi-user collaboration, remote presentation, and industrial simulation in a shared virtual environment. The application supports both VR headset and desktop (keyboard + mouse) connections simultaneously, making it accessible without specialist hardware.",
+      "This project was developed as my Master's thesis at Brno University of Technology, submitted in 2023. Building on my earlier Bachelor's thesis (the VR Workshop), this project explored how virtual reality can serve the needs of Industry 4.0, specifically enabling multi-user collaboration, remote presentation, and industrial simulation in a shared virtual environment. The application supports both VR headset and desktop (keyboard + mouse) connections simultaneously, making it accessible without specialist hardware.",
 
     overview:
-      'VR Meetingroom is a cross-platform Unity application that connects multiple users inside a shared virtual space. Participants can join via a VR headset or a standard PC, and are represented by avatars whose head and hand positions are tracked in real time. The application offers three distinct environments — a conference room, a school classroom, and an industrial workshop hall — each with its own set of interactive features. Networking is handled via Photon PUN2 with a dedicated server, and voice communication between users runs on a separate Photon Voice server.',
+      'VR Meetingroom is a cross-platform Unity application that connects multiple users inside a shared virtual space. Participants can join via a VR headset or a standard PC, and are represented by avatars whose head and hand positions are tracked in real time. The application offers three distinct environments, a conference room, a school classroom, and an industrial workshop hall, each with its own set of interactive features. Networking is handled via Photon PUN2 with a dedicated server, and voice communication between users runs on a separate Photon Voice server.',
 
     modules: [
       {
@@ -320,7 +320,7 @@ export const projects: Project[] = [
       {
         title: 'Cross-platform multiplayer',
         description:
-          'Users connect via VR headset or desktop PC in the same session. A unique room ID system secures each session. The session founder controls scene switching — all connected users are moved together. Platform selection happens at login; VR users get full 6DOF movement and hand tracking while desktop users navigate with keyboard and mouse.',
+          'Users connect via VR headset or desktop PC in the same session. A unique room ID system secures each session. The session founder controls scene switching, and all connected users are moved together. Platform selection happens at login; VR users get full 6DOF movement and hand tracking while desktop users navigate with keyboard and mouse.',
       },
       {
         title: 'Avatar representation',
@@ -335,10 +335,10 @@ export const projects: Project[] = [
       {
         title: 'Interactive 3D model showcase',
         description:
-          'The classroom scene supports importing and presenting any 3D model as a floating interactive object. The demo includes a robotic arm (inverse kinematics, grabbable end effector) and a conveyor belt assembly. Models can defy gravity and be inspected from any angle — useful for explaining mechanisms that would be impossible to demonstrate with a physical object.',
+          'The classroom scene supports importing and presenting any 3D model as a floating interactive object. The demo includes a robotic arm (inverse kinematics, grabbable end effector) and a conveyor belt assembly. Models can defy gravity and be inspected from any angle, useful for explaining mechanisms that would be impossible to demonstrate with a physical object.',
       },
       {
-        title: 'Industrial digital twin — vehicle parts inspector',
+        title: 'Industrial digital twin: vehicle parts inspector',
         description:
           'The Workshop scene includes a fully scripted five-stage quality control robot for automotive parts. The operator loads a part, closes the safety flap, and presses two simultaneous buttons to start the cycle. The central rotating platform advances the part through three stations: a two-arm processing robot, an airtightness tester, and a linear ejector that sends approved parts to a conveyor. Rejected parts are returned to the operator. The entire control script was written to be reusable for programming the physical machine.',
       },
@@ -363,7 +363,7 @@ export const projects: Project[] = [
       {
         title: 'VR UI without screen-space overlay',
         description:
-          "Displaying UI directly on the VR headset screen causes motion sickness and makes interaction awkward. Instead, all controls are presented on a virtual tablet held in the user's off-hand, interactable with the other controller. The tablet's contents change per scene and can host buttons, sliders, or a virtual keyboard — mirroring the same feature set as the desktop side panel.",
+          "Displaying UI directly on the VR headset screen causes motion sickness and makes interaction awkward. Instead, all controls are presented on a virtual tablet held in the user's off-hand, interactable with the other controller. The tablet's contents change per scene and can host buttons, sliders, or a virtual keyboard, mirroring the same feature set as the desktop side panel.",
       },
       {
         title: 'XR Input System with dual-device bindings',
@@ -373,7 +373,7 @@ export const projects: Project[] = [
       {
         title: 'Physics-accurate conveyor belt',
         description:
-          "The belt simulation avoids kinematic animation in favour of Unity's physics engine. On each FixedUpdate frame, the belt's RigidBody position is teleported one step forward (invisible to the renderer), then immediately moved back via MovePosition — dragging any objects in contact with it. Speed is controlled by adjusting step size and call frequency. Packages respond correctly to mass, friction, and collisions without any manual force calculations.",
+          "The belt simulation avoids kinematic animation in favour of Unity's physics engine. On each FixedUpdate frame, the belt's RigidBody position is teleported one step forward (invisible to the renderer), then immediately moved back via MovePosition, dragging any objects in contact with it. Speed is controlled by adjusting step size and call frequency. Packages respond correctly to mass, friction, and collisions without any manual force calculations.",
       },
       {
         title: 'Inverse kinematics for avatars and robots',
@@ -414,17 +414,17 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/FVeskrna/MimiMatch',
 
     screenshots: [
-      { filename: 'mimimatch-mainscreen.jpeg', caption: 'Main screen — swipe to like or dislike a name' },
+      { filename: 'mimimatch-mainscreen.jpeg', caption: 'Main screen: swipe to like or dislike a name' },
       { filename: 'mimimatch-action.jpeg', caption: 'Swipe action in progress' },
       { filename: 'mimimatch-selection.jpeg', caption: 'Matched names selection view' },
-      { filename: 'mimimatch-settings.jpeg', caption: 'Settings — filter names by origin and gender' },
+      { filename: 'mimimatch-settings.jpeg', caption: 'Settings: filter names by origin and gender' },
     ],
 
     context:
-      'MimiMatch is a small personal project built to solve a real problem: picking a baby name is hard, and most tools make it harder. The idea was simple — take the Tinder swipe mechanic, apply it to a curated list of Czech baby names, and let couples swipe through names independently before comparing their shortlists. The app is entirely client-side, requires no account or backend, and deploys as a static site on GitHub Pages.',
+      'MimiMatch is a small personal project built to solve a real problem: picking a baby name is hard, and most tools make it harder. The idea was simple: take the Tinder swipe mechanic, apply it to a curated list of Czech baby names, and let couples swipe through names independently before comparing their shortlists. The app is entirely client-side, requires no account or backend, and deploys as a static site on GitHub Pages.',
 
     overview:
-      'MimiMatch presents names one at a time on a swipeable card. Each card shows the name in two typefaces — a classic serif and a handwritten script — alongside the family surname so parents can hear how the full name sounds. A short cultural or historical fact appears below each name. Users swipe right (or tap the heart) to save a name to their shortlist, or swipe left (or tap X) to skip it. Preferences and progress are saved to localStorage so the session persists across page refreshes and browser restarts.',
+      'MimiMatch presents names one at a time on a swipeable card. Each card shows the name in two typefaces, a classic serif and a handwritten script, alongside the family surname so parents can hear how the full name sounds. A short cultural or historical fact appears below each name. Users swipe right (or tap the heart) to save a name to their shortlist, or swipe left (or tap X) to skip it. Preferences and progress are saved to localStorage so the session persists across page refreshes and browser restarts.',
 
     modules: [
       {
@@ -463,7 +463,7 @@ export const projects: Project[] = [
       {
         title: 'Touch gesture handling without a library',
         description:
-          'Swipe detection is implemented from scratch using React touch event handlers (onTouchStart, onTouchMove, onTouchEnd). The delta from the initial touch position drives a live CSS transform — translateX and a proportional rotation — applied inline while dragging. Once the finger lifts, if the displacement exceeds a 100px threshold the like or discard action fires; otherwise the card springs back. This avoids any gesture library dependency while giving native-feeling drag behaviour.',
+          'Swipe detection is implemented from scratch using React touch event handlers (onTouchStart, onTouchMove, onTouchEnd). The delta from the initial touch position drives a live CSS transform, translateX and a proportional rotation, applied inline while dragging. Once the finger lifts, if the displacement exceeds a 100px threshold the like or discard action fires; otherwise the card springs back. This avoids any gesture library dependency while giving native-feeling drag behaviour.',
       },
       {
         title: 'Animated card exit',
@@ -478,7 +478,7 @@ export const projects: Project[] = [
       {
         title: 'Three-view navigation with a single state variable',
         description:
-          "The entire app fits in one component tree with a view state of type 'discovery' | 'shortlist' | 'settings'. There is no router — view switches are instant and stateless. Each view mounts with a Tailwind animate-in / slide-in-from-bottom transition for a smooth feel without animation libraries.",
+          "The entire app fits in one component tree with a view state of type 'discovery' | 'shortlist' | 'settings'. There is no router, view switches are instant and stateless. Each view mounts with a Tailwind animate-in / slide-in-from-bottom transition for a smooth feel without animation libraries.",
       },
       {
         title: 'localStorage persistence',
@@ -503,7 +503,7 @@ export const projects: Project[] = [
 
     tryIt: {
       heading: 'Try it',
-      body: 'MimiMatch is deployed as a static site on GitHub Pages and works on any mobile browser — no install required.',
+      body: 'MimiMatch is deployed as a static site on GitHub Pages and works on any mobile browser, no install required.',
       liveUrl: 'https://fveskrna.github.io/MimiMatch/',
       liveLabel: 'Open MimiMatch',
       githubUrl: 'https://github.com/FVeskrna/MimiMatch',
@@ -519,10 +519,10 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/FVeskrna/Reddit-Video-Compilation-Bot',
 
     context:
-      'This is a personal automation project built to remove the manual work from running a short-form video compilation channel. The idea was to fully automate the pipeline from source content to published video — scraping trending clips from Reddit, filtering them to a consistent format, merging them into a single compilation, and uploading the result directly to YouTube. The project is split into three independent scripts that can be run separately or chained together into a single end-to-end run.',
+      'This is a personal automation project built to remove the manual work from running a short-form video compilation channel. The idea was to fully automate the pipeline from source content to published video: scraping trending clips from Reddit, filtering them to a consistent format, merging them into a single compilation, and uploading the result directly to YouTube. The project is split into three independent scripts that can be run separately or chained together into a single end-to-end run.',
 
     overview:
-      'The bot connects to Reddit via the PRAW API and pulls top posts from configurable subreddits over a chosen time window. It filters for vertical (9:16) video posts that fall within a per-clip duration limit, downloads them, and merges them into a 1080p compilation using MoviePy and FFmpeg. Previous output files are automatically archived before each new run. When the compilation is ready, a separate upload script authenticates with the YouTube Data API v3 via OAuth2 and publishes the video with a title, description, and privacy status — all without any manual browser interaction. Credentials refresh automatically between runs so the bot can operate unattended on a schedule.',
+      'The bot connects to Reddit via the PRAW API and pulls top posts from configurable subreddits over a chosen time window. It filters for vertical (9:16) video posts that fall within a per-clip duration limit, downloads them, and merges them into a 1080p compilation using MoviePy and FFmpeg. Previous output files are automatically archived before each new run. When the compilation is ready, a separate upload script authenticates with the YouTube Data API v3 via OAuth2 and publishes the video with a title, description, and privacy status, all without any manual browser interaction. Credentials refresh automatically between runs so the bot can operate unattended on a schedule.',
 
     modules: [
       {
@@ -557,7 +557,7 @@ export const projects: Project[] = [
       {
         title: 'Clip ordering and randomisation',
         description:
-          'The first five clips — assumed to be the highest-quality picks — are sorted by file creation time to appear first in the compilation. All remaining clips are randomly shuffled. This gives the opening of each video a reliable hook while keeping the rest varied between runs.',
+          'The first five clips, assumed to be the highest-quality picks, are sorted by file creation time to appear first in the compilation. All remaining clips are randomly shuffled. This gives the opening of each video a reliable hook while keeping the rest varied between runs.',
       },
       {
         title: 'Video merging with MoviePy and FFmpeg',
@@ -572,7 +572,7 @@ export const projects: Project[] = [
       {
         title: 'YouTube upload with OAuth2 and token refresh',
         description:
-          'The upload script authenticates using the YouTube Data API v3 with an OAuth2 InstalledAppFlow. Credentials are stored as a JSON token file after the first browser login. On every subsequent run the script checks whether the token is still valid — if expired, it refreshes automatically using the stored refresh token without requiring any user interaction. The video is uploaded with title, description, category ID, and privacy status all set programmatically.',
+          'The upload script authenticates using the YouTube Data API v3 with an OAuth2 InstalledAppFlow. Credentials are stored as a JSON token file after the first browser login. On every subsequent run the script checks whether the token is still valid; if expired, it refreshes automatically using the stored refresh token without requiring any user interaction. The video is uploaded with title, description, category ID, and privacy status all set programmatically.',
       },
     ],
 
@@ -580,7 +580,7 @@ export const projects: Project[] = [
       {
         title: 'Environment variable credential management',
         description:
-          'All sensitive values — Reddit client ID and secret, user agent string, YouTube token filename, and client secret filename — are read exclusively from environment variables via os.getenv(). No credentials appear anywhere in the source code, making the scripts safe to commit and share publicly.',
+          'All sensitive values, Reddit client ID and secret, user agent string, YouTube token filename, and client secret filename, are read exclusively from environment variables via os.getenv(). No credentials appear anywhere in the source code, making the scripts safe to commit and share publicly.',
       },
       {
         title: 'Robust Reddit video URL extraction',
@@ -600,12 +600,12 @@ export const projects: Project[] = [
       {
         title: 'Modular three-script architecture',
         description:
-          'Download, upload, and combined pipeline are kept in separate files. Each script can be run independently — useful for re-uploading a manually edited compilation, or for running the scraper on a schedule and uploading later. The full pipeline script wires them together for unattended operation while keeping each concern isolated and testable on its own.',
+          'Download, upload, and combined pipeline are kept in separate files. Each script can be run independently, useful for re-uploading a manually edited compilation, or for running the scraper on a schedule and uploading later. The full pipeline script wires them together for unattended operation while keeping each concern isolated and testable on its own.',
       },
       {
         title: 'Automatic OAuth2 token persistence and refresh',
         description:
-          'After the initial browser-based OAuth login, credentials are serialised to a JSON token file containing the access token, refresh token, token URI, client ID, and client secret. On every subsequent run the script loads this file, constructs a Credentials object, and calls credentials.refresh(Request()) if the access token has expired — all without opening a browser. This makes the upload step fully headless once the initial login has been completed.',
+          'After the initial browser-based OAuth login, credentials are serialised to a JSON token file containing the access token, refresh token, token URI, client ID, and client secret. On every subsequent run the script loads this file, constructs a Credentials object, and calls credentials.refresh(Request()) if the access token has expired, all without opening a browser. This makes the upload step fully headless once the initial login has been completed.',
       },
     ],
 
@@ -623,7 +623,7 @@ export const projects: Project[] = [
 
     closing: {
       heading: 'View the source',
-      body: 'The full source is available on GitHub. Credentials are managed entirely via environment variables — no API keys are present in the repository.',
+      body: 'The full source is available on GitHub. Credentials are managed entirely via environment variables, no API keys are present in the repository.',
       linkLabel: 'View on GitHub',
       linkUrl: 'https://github.com/FVeskrna/Reddit-Video-Compilation-Bot',
     },
@@ -637,15 +637,15 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/FVeskrna/Unity3D---Sudoku-solver',
 
     screenshots: [
-      { filename: 'sudokuSolver-unsolved.png', caption: 'Puzzle loaded — ready to solve' },
+      { filename: 'sudokuSolver-unsolved.png', caption: 'Puzzle loaded: ready to solve' },
       { filename: 'sudokuSolver-solved.png', caption: 'Solved state after backtracking completes' },
     ],
 
     context:
-      'This is a focused algorithmic project built to explore how a classic constraint-satisfaction problem can be implemented cleanly inside Unity. Rather than using a game engine for a game, the idea was to use Unity as an interactive UI host for a pure algorithm — a pattern that appears often in engineering tooling and simulation work. The project keeps the scope tight: a correct, readable backtracking solver, a clear grid UI, and a clean separation between the solving logic and the rendering layer.',
+      'This is a focused algorithmic project built to explore how a classic constraint-satisfaction problem can be implemented cleanly inside Unity. Rather than using a game engine for a game, the idea was to use Unity as an interactive UI host for a pure algorithm, a pattern that appears often in engineering tooling and simulation work. The project keeps the scope tight: a correct, readable backtracking solver, a clear grid UI, and a clean separation between the solving logic and the rendering layer.',
 
     overview:
-      'The application displays a 9×9 Sudoku grid pre-loaded with a puzzle. Clicking Solve runs the backtracking algorithm against the current board state and renders the completed grid when a solution is found. Clicking Reset restores the board to its original unsolved state. The solver is deterministic — given the same input it always produces the same solution — and fast enough for all human-grade puzzles without any perceptible delay.',
+      'The application displays a 9×9 Sudoku grid pre-loaded with a puzzle. Clicking Solve runs the backtracking algorithm against the current board state and renders the completed grid when a solution is found. Clicking Reset restores the board to its original unsolved state. The solver is deterministic, given the same input it always produces the same solution, and fast enough for all human-grade puzzles without any perceptible delay.',
 
     algorithmSteps: [
       {
@@ -654,14 +654,14 @@ export const projects: Project[] = [
           'Scan the 9×9 board in row-major order and return the coordinates of the first cell containing zero.',
       },
       {
-        step: 'Try each candidate digit 1–9',
+        step: 'Try each candidate digit 1-9',
         description:
           'For the empty cell found, iterate through digits 1 to 9 as candidate values.',
       },
       {
         step: 'Check row, column and box constraints',
         description:
-          'Before placing a digit, verify it does not already appear in the same row, the same column, or the same 3×3 subgrid — the three Sudoku constraints.',
+          'Before placing a digit, verify it does not already appear in the same row, the same column, or the same 3×3 subgrid, the three Sudoku constraints.',
       },
       {
         step: 'Place and recurse',
@@ -671,7 +671,7 @@ export const projects: Project[] = [
       {
         step: 'Backtrack on dead ends',
         description:
-          'If no digit from 1–9 is valid for a cell, reset the cell to zero and return false — triggering the previous recursive call to try its next candidate.',
+          'If no digit from 1-9 is valid for a cell, reset the cell to zero and return false, triggering the previous recursive call to try its next candidate.',
       },
       {
         step: 'Terminate on success',
@@ -699,7 +699,7 @@ export const projects: Project[] = [
       {
         title: 'Constraint validation',
         description:
-          'Before placing any digit the solver checks all three Sudoku constraints — row uniqueness, column uniqueness, and 3×3 subgrid uniqueness — in a single validation pass. Any violation skips the candidate immediately without modifying the board.',
+          'Before placing any digit the solver checks all three Sudoku constraints, row uniqueness, column uniqueness, and 3×3 subgrid uniqueness, in a single validation pass. Any violation skips the candidate immediately without modifying the board.',
       },
     ],
     featuresHeading: 'Features',
@@ -708,7 +708,7 @@ export const projects: Project[] = [
       {
         title: 'Depth-first search with implicit call stack',
         description:
-          'The backtracking algorithm uses C# recursion rather than an explicit stack data structure. Each recursive call represents one tentative digit placement. The call stack itself acts as the backtrack history — returning false from any level automatically undoes that placement and resumes the parent call\'s candidate loop. This keeps the implementation concise and directly mirrors the logical structure of the algorithm.',
+          'The backtracking algorithm uses C# recursion rather than an explicit stack data structure. Each recursive call represents one tentative digit placement. The call stack itself acts as the backtrack history: returning false from any level automatically undoes that placement and resumes the parent call\'s candidate loop. This keeps the implementation concise and directly mirrors the logical structure of the algorithm.',
       },
       {
         title: 'In-place board mutation',
@@ -729,7 +729,7 @@ export const projects: Project[] = [
 
     reflection: {
       heading: 'Limitations and possible extensions',
-      body: 'The solver uses pure backtracking without human-style heuristics such as most-constrained cell selection or candidate elimination. For typical published puzzles this is fast enough to be imperceptible, but pathological inputs designed to defeat backtracking could produce slower runs. The project also does not detect puzzles with multiple solutions or report unsatisfiable inputs — it assumes a valid single-solution board. Natural extensions would include step-by-step visualisation of the search process, pencil-mark overlays, constraint propagation (AC-3), and import/export of puzzles from text or image.',
+      body: 'The solver uses pure backtracking without human-style heuristics such as most-constrained cell selection or candidate elimination. For typical published puzzles this is fast enough to be imperceptible, but pathological inputs designed to defeat backtracking could produce slower runs. The project also does not detect puzzles with multiple solutions or report unsatisfiable inputs; it assumes a valid single-solution board. Natural extensions would include step-by-step visualisation of the search process, pencil-mark overlays, constraint propagation (AC-3), and import/export of puzzles from text or image.',
     },
 
     techStack: ['Unity', 'C#', 'Unity UI'],
