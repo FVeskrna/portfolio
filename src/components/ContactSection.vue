@@ -3,12 +3,10 @@
     <div class="container">
       <div class="contact panel">
         <div class="contact-inner">
-          <h2 class="contact-title">
-            Open to new roles
-          </h2>
+          <h2 class="contact-title">Let's connect</h2>
           <p class="contact-body">
-            Whether you have a role in mind or just want to connect, email is the fastest way to reach
-            me.
+            Always glad to meet fellow engineers and people from the industry, whether to exchange
+            ideas or talk about software. Email is the quickest way to reach me.
           </p>
 
           <div class="email-row">

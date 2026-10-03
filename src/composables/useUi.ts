@@ -1,5 +1,4 @@
 import { ref } from 'vue'
-import router from '../router'
 import { profile } from '../data/profile'
 
 type Theme = 'dark' | 'light'
@@ -31,9 +30,12 @@ function toggleTheme() {
 }
 
 async function goToSection(id: string) {
+  // Loaded lazily: the router imports the views, which import this module.
+  const { default: router } = await import('../router')
   if (router.currentRoute.value.path !== '/') {
-    await router.push('/')
-    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
+    // The router's scrollBehavior scrolls to the hash once the home view has rendered.
+    await router.push({ path: '/', hash: `#${id}` })
+    return
   }
   document.getElementById(id)?.scrollIntoView({ block: 'start' })
 }

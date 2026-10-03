@@ -115,6 +115,17 @@ const commands = computed<Command[]>(() => [
     icon: IconHash,
     action: () => goToSection(id),
   })),
+  {
+    id: 'all-projects',
+    group: 'Sections',
+    label: 'All projects',
+    hint: `${projects.length} case studies`,
+    icon: IconFolder,
+    keywords: 'archive portfolio work',
+    action: () => {
+      router.push('/projects')
+    },
+  },
   ...projects.map((p) => ({
     id: `project-${p.slug}`,
     group: 'Case studies',

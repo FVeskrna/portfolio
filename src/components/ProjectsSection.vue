@@ -2,18 +2,20 @@
   <section class="section" id="projects">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">
-          Selected work
-        </h2>
+        <h2 class="section-title">Selected work</h2>
+        <p class="section-lede">
+          Each project comes with a detailed case study covering the goal, how it was built, and the
+          key technical decisions behind it.
+        </p>
       </div>
 
       <div class="bento">
         <RouterLink
-          v-for="(p, i) in featured"
+          v-for="p in featured"
           :key="p.slug"
           :to="`/projects/${p.slug}`"
           class="tile panel"
-          :class="[i === 0 ? 'tile-wide' : 'tile-half', `shape-${shapeOf(p)}`]"
+          :class="[shapeOf(p) === 'desktop' ? 'tile-wide' : 'tile-half', `shape-${shapeOf(p)}`, { flip: flipped.has(p.slug) }]"
           @pointermove="track"
         >
           <div class="tile-text">
@@ -22,7 +24,7 @@
             <ul class="tile-tags">
               <li v-for="tag in p.tags.slice(0, 4)" :key="tag" class="chip">{{ tag }}</li>
             </ul>
-            <span class="tile-cta">
+            <span class="tile-cta btn btn-ghost btn-sm">
               Read case study
               <IconArrowRight :size="14" />
             </span>
@@ -31,7 +33,7 @@
           <div class="tile-media" aria-hidden="true">
             <template v-if="shapeOf(p) === 'desktop'">
               <div class="window">
-                <img :src="shot(p, 0)" alt="" loading="lazy" decoding="async" />
+                <img :src="shot(p, p.coverIndex ?? 0)" alt="" loading="lazy" decoding="async" />
               </div>
             </template>
             <template v-else>
@@ -52,17 +54,30 @@
         </RouterLink>
       </div>
 
-      <h3 class="more-title">More projects</h3>
-      <ul class="more">
-        <li v-for="p in others" :key="p.slug">
-          <RouterLink :to="`/projects/${p.slug}`" class="more-row">
-            <span class="more-name">{{ p.title }}</span>
-            <span class="more-tagline">{{ p.tagline }}</span>
-            <span class="more-tags">{{ p.tags.slice(0, 3).join(' · ') }}</span>
-            <IconArrowUpRight :size="16" class="more-arrow" />
-          </RouterLink>
-        </li>
-      </ul>
+      <RouterLink to="/projects" class="all panel" @pointermove="track">
+        <div class="all-text">
+          <h3 class="all-title">Browse all {{ projects.length }} projects</h3>
+          <p class="all-body">
+            Including {{ teaserNames }}, each with its own case study.
+          </p>
+        </div>
+        <div class="all-previews" aria-hidden="true">
+          <img
+            v-for="p in teaserThumbs"
+            :key="p.slug"
+            :src="shot(p, p.coverIndex ?? 0)"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            class="all-thumb"
+          />
+          <span v-if="moreCount > 0" class="all-more mono">+{{ moreCount }}</span>
+        </div>
+        <span class="all-btn btn btn-primary">
+          View all projects
+          <IconArrowRight :size="14" />
+        </span>
+      </RouterLink>
     </div>
   </section>
 </template>
@@ -70,16 +85,37 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { projects, type Project } from '../data/projects'
-import { IconArrowRight, IconArrowUpRight } from '../icons'
+import { IconArrowRight } from '../icons'
 
 const base = import.meta.env.BASE_URL
 
-const featured = projects.filter((p) => p.screenshots?.length)
-const others = projects.filter((p) => !p.screenshots?.length)
+const featured = projects.filter((p) => p.featured && p.screenshots?.length)
+const others = projects
+  .filter((p) => !featured.includes(p))
+  .sort((a, b) => Number(!!b.screenshots?.length) - Number(!!a.screenshots?.length))
+
+const teaserThumbs = others.filter((p) => p.screenshots?.length).slice(0, 3)
+const moreCount = others.length - teaserThumbs.length
+const teaserNames = (() => {
+  const names = others.slice(0, 3).map((p) => p.title)
+  return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : names[0]
+})()
 
 const PHONE = new Set(['mimimatch', 'sudoku-solver'])
 function shapeOf(p: Project) {
   return PHONE.has(p.slug) ? 'pair' : 'desktop'
+}
+
+// Alternate the image side on consecutive wide tiles so the rhythm doesn't repeat.
+const flipped = new Set<string>()
+let wideRun = 0
+for (const p of featured) {
+  if (shapeOf(p) !== 'desktop') {
+    wideRun = 0
+    continue
+  }
+  if (wideRun % 2 === 1) flipped.add(p.slug)
+  wideRun++
 }
 
 function shot(p: Project, i: number) {
@@ -174,16 +210,6 @@ function track(e: PointerEvent) {
   margin-top: 4px;
 }
 
-.tile-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text);
-}
-
 .tile-cta :deep(svg) {
   transition: transform 200ms var(--ease-out);
 }
@@ -214,6 +240,24 @@ function track(e: PointerEvent) {
 
 .tile:hover .window {
   transform: translate(-6px, -4px);
+}
+
+.tile-wide.flip {
+  grid-template-columns: 8fr minmax(260px, 4fr);
+}
+
+.tile-wide.flip .tile-media {
+  order: -1;
+}
+
+.tile-wide.flip .window {
+  left: auto;
+  right: 0;
+  border-radius: 0 10px 0 0;
+}
+
+.tile-wide.flip:hover .window {
+  transform: translate(6px, -4px);
 }
 
 .window img {
@@ -255,55 +299,120 @@ function track(e: PointerEvent) {
   border-radius: 12px;
 }
 
-/* More projects */
-.more-title {
-  margin: 72px 0 16px;
-  font-size: 1.25rem;
-  letter-spacing: -0.025em;
+/* Case-study CTA inside tiles */
+.tile-cta {
+  margin-top: 12px;
+  pointer-events: none;
 }
 
-.more {
-  border-top: 1px solid var(--line);
-}
-
-.more-row {
-  display: grid;
-  grid-template-columns: 3fr 5fr 3fr 24px;
-  align-items: center;
-  gap: 24px;
-  padding: 20px 8px;
-  border-bottom: 1px solid var(--line);
-  transition: background-color var(--fast) ease;
-}
-
-.more-row:hover {
+.tile:hover .tile-cta {
   background: var(--glow);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 30%, transparent) inset;
 }
 
-.more-name {
-  font-weight: 500;
-  letter-spacing: -0.015em;
-}
-
-.more-tagline {
-  font-size: 0.875rem;
+.section-lede {
+  grid-column: 1 / span 7;
+  margin-top: 16px;
+  font-size: 1.0625rem;
+  line-height: 1.6;
   color: var(--text-2);
-  line-height: 1.5;
+  max-width: 58ch;
 }
 
-.more-tags {
+/* Archive teaser */
+.all {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 24px 40px;
+  margin-top: 16px;
+  padding: 28px 32px;
+  overflow: hidden;
+  isolation: isolate;
+  transition: box-shadow 240ms ease;
+}
+
+.all::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--glow), transparent 70%);
+  transition: opacity 300ms ease;
+}
+
+.all:hover {
+  box-shadow: 0 0 0 1px var(--line-strong), var(--shadow-panel);
+}
+
+.all:hover::before {
+  opacity: 1;
+}
+
+.all-title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.all-body {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-2);
+  max-width: 52ch;
+}
+
+.all-previews {
+  display: flex;
+  align-items: center;
+}
+
+.all-thumb,
+.all-more {
+  width: 88px;
+  height: 56px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px var(--line-strong), 0 0 0 4px var(--panel);
+  transition: transform 300ms var(--ease-out);
+}
+
+.all-thumb {
+  object-fit: cover;
+  object-position: center top;
+  background: var(--bg);
+}
+
+.all-thumb + .all-thumb,
+.all-thumb + .all-more {
+  margin-left: -18px;
+}
+
+.all-more {
+  display: grid;
+  place-items: center;
   font-size: 0.8125rem;
-  color: var(--text-3);
+  color: var(--text-2);
+  background: var(--bg-raised);
 }
 
-.more-arrow {
-  color: var(--text-3);
-  transition: transform 200ms var(--ease-out), color var(--fast) ease;
+.all:hover .all-thumb:nth-child(1) {
+  transform: translateX(-6px);
 }
 
-.more-row:hover .more-arrow {
-  color: var(--text);
-  transform: translate(2px, -2px);
+.all:hover .all-more {
+  transform: translateX(6px);
+}
+
+.all-btn :deep(svg) {
+  transition: transform 200ms var(--ease-out);
+}
+
+.all:hover .all-btn :deep(svg) {
+  transform: translateX(3px);
 }
 
 @media (max-width: 960px) {
@@ -321,24 +430,26 @@ function track(e: PointerEvent) {
     width: 115%;
     margin-bottom: -2px;
   }
+  .tile-wide.flip {
+    grid-template-columns: 1fr;
+  }
+  .tile-wide.flip .tile-media {
+    order: 0;
+  }
+  .tile-wide.flip .window {
+    right: auto;
+    border-radius: 10px 0 0 0;
+  }
   .tile-half {
     grid-column: 1 / -1;
     min-height: 520px;
   }
-  .more-row {
-    grid-template-columns: 1fr 24px;
-    gap: 6px 16px;
+  .all {
+    grid-template-columns: 1fr;
+    padding: 24px;
   }
-  .more-name {
-    grid-column: 1;
-  }
-  .more-tagline,
-  .more-tags {
-    grid-column: 1;
-  }
-  .more-arrow {
-    grid-column: 2;
-    grid-row: 1 / span 3;
+  .section-lede {
+    grid-column: 1 / -1;
   }
 }
 

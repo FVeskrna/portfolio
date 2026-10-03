@@ -109,7 +109,7 @@
             </section>
 
             <section v-if="project.algorithmSteps?.length" id="how-it-works" class="doc-section">
-              <h2 class="doc-h2">How the solver works</h2>
+              <h2 class="doc-h2">{{ project.algorithmHeading ?? 'How the solver works' }}</h2>
               <ol class="steps">
                 <li v-for="(s, i) in project.algorithmSteps" :key="s.step" class="step">
                   <span class="step-n mono">{{ String(i + 1).padStart(2, '0') }}</span>
@@ -287,11 +287,10 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
+import { useRoute, useRouter, RouterLink } from 'vue-router'
 import NavBar from '../components/NavBar.vue'
 import SiteFooter from '../components/SiteFooter.vue'
 import { getProjectBySlug, projects } from '../data/projects'
-import { useUi } from '../composables/useUi'
 import {
   IconGitHub,
   IconArrowLeft,
@@ -303,7 +302,7 @@ import {
 } from '../icons'
 
 const route = useRoute()
-const { goToSection } = useUi()
+const router = useRouter()
 const base = import.meta.env.BASE_URL
 
 const project = computed(() => getProjectBySlug(route.params.slug as string))
@@ -340,7 +339,7 @@ function detectShape(e: Event) {
 }
 
 function goBack() {
-  goToSection('projects')
+  router.push('/projects')
 }
 
 function jump(id: string) {
@@ -506,6 +505,10 @@ onUnmounted(() => {
 
 .gallery-portrait {
   grid-template-columns: repeat(4, 1fr);
+}
+
+.gallery .shot:only-child {
+  grid-column: 1 / -1;
 }
 
 .shot {

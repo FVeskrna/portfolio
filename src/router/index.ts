@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CaseStudyView from '../views/CaseStudyView.vue'
+import ProjectsView from '../views/ProjectsView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -9,6 +10,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+    },
+    {
+      path: '/projects',
+      name: 'projects',
+      component: ProjectsView,
     },
     {
       path: '/projects/:slug',
@@ -21,7 +27,7 @@ const router = createRouter({
       return savedPosition
     }
     if (to.hash) {
-      return { el: to.hash, behavior: 'smooth' }
+      return { el: to.hash, top: 84 }
     }
     return { top: 0, behavior: 'smooth' }
   },
